@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { User } from '../databases/user/user.entity';
-
+import { Book } from '../databases/book/book.entity';
+import { BookTransaction } from '../databases/book/book-transaction.entity';
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-require-imports
 require('dotenv').config();
 
@@ -38,7 +39,7 @@ class ConfigService {
       username: this.getValue('POSTGRES_USER'),
       password: this.getValue('POSTGRES_PASSWORD'),
       database: this.getValue('POSTGRES_DB'),
-      entities: [User],
+      entities: [User, Book, BookTransaction],
       migrationsTableName: 'migration',
       migrations: ['migrations/*.ts'],
       ssl: this.isProduction() ? { rejectUnauthorized: false } : false,
