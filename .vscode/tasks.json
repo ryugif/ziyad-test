@@ -1,0 +1,12 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "bun",
+      "script": "nest start --watch",
+      "problemMatcher": [],
+      "label": "bun: start:dev",
+      "detail": "bun run nest start --watch - package.json"
+    }
+  ]
+}
