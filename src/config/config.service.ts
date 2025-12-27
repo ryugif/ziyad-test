@@ -41,7 +41,8 @@ class ConfigService {
       database: this.getValue('POSTGRES_DB'),
       entities: [User, Book, BookTransaction],
       migrationsTableName: 'migration',
-      migrations: ['migrations/*.ts'],
+      // migrations: ['migrations/*.ts'],
+      migrations: ['dist/migrations/*.js'],
       ssl: this.isProduction() ? { rejectUnauthorized: false } : false,
       synchronize: false,
     };
