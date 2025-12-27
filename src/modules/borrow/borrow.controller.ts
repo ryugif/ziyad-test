@@ -73,7 +73,11 @@ export class BorrowController {
         });
     }
 
-    return await this.borrowService.borrowBook(payload, auth.id);
+    const borrowedBooks = await this.borrowService.borrowBook(payload, auth.id);
+    return {
+      message: `Successfully borrowed ${borrowedBooks.length} books.`,
+      data: borrowedBooks,
+    };
   }
 
   @Post('return')
@@ -147,7 +151,11 @@ export class BorrowController {
         });
     }
 
-    return await this.borrowService.returnBook(payload, auth.id);
+    const returnedBooks = await this.borrowService.returnBook(payload, auth.id);
+    return {
+      message: `Successfully returned ${returnedBooks.length} books.`,
+      data: returnedBooks,
+    };
   }
 
   @Get()
