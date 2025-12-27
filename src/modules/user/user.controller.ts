@@ -9,16 +9,16 @@ import { UserService } from './user.service';
 import { SignInDto, SignUpDto } from './dto/user.dto';
 import { AccessTokenGuard } from '../../guards/accessToken.guard';
 
-@Controller()
+@Controller('auth')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('register')
+  @Post('sign-up')
   async signUp(@Body() payload: SignUpDto) {
     return await this.userService.signUp(payload);
   }
 
-  @Post('login')
+  @Post('sign-in')
   async signIn(@Body() payload: SignInDto) {
     const findUser = await this.userService.findOneByEmail(payload.email);
     if (!findUser)
@@ -27,7 +27,7 @@ export class UserController {
     return await this.userService.signIn(payload);
   }
 
-  @Post('logout')
+  @Post('sign-out')
   @UseGuards(AccessTokenGuard)
   logout() {
     return this.userService.signOut();
