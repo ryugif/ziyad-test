@@ -1,6 +1,7 @@
 import { Exclude, classToPlain } from 'class-transformer';
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseModel } from '../base.model';
+import { BookTransaction } from '../book/book-transaction.entity';
 
 @Entity('user')
 export class User extends BaseModel {
@@ -13,6 +14,9 @@ export class User extends BaseModel {
   @Exclude()
   @Column({ type: 'varchar', length: 300 })
   password: string;
+
+  @OneToMany(() => BookTransaction, (transaction) => transaction.user)
+  transactions: BookTransaction[];
 
   toJSON() {
     return classToPlain(this);
